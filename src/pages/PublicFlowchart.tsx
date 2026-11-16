@@ -132,7 +132,7 @@ const publishedLabel = formatDateTime(data.published_at);
         opacity: 0.75,
       }}
     >
-      Published via STEM-Accessibility. This page is a public rendering of a shared flowchart.
+      Published via STEM-Accessibility. Review AI-generated descriptions for accuracy.
     </div>
     </div>
   );

@@ -3,11 +3,12 @@ import { Link, useParams } from "react-router-dom";
 import { apiFetch } from "../lib/api";
 import {
   deckLinksText,
-  describeDeckDiagram,
   type DeckDiagram,
   type DeckResult,
 } from "../services/slideDecks";
 import "./styles/SlideDeck.css";
+import ReactMarkdown from "react-markdown";
+import DeckCropReview from "../components/editor/DeckCropReview";
 
 function DiagramCard({ deckId, item }: { deckId: string; item: DeckDiagram }) {
   const [image, setImage] = useState("");
@@ -15,6 +16,8 @@ function DiagramCard({ deckId, item }: { deckId: string; item: DeckDiagram }) {
   const [copyMessage, setCopyMessage] = useState("");
   useEffect(() => {
     const controller = new AbortController();
+    setImageError(false);
+    if (item.status === "queued" || item.status === "processing") return () => controller.abort();
     apiFetch<{ image_data_url: string }>(
       `/decks/${deckId}/diagrams/${item.id}/image`,
       { signal: controller.signal },
@@ -24,7 +27,7 @@ function DiagramCard({ deckId, item }: { deckId: string; item: DeckDiagram }) {
         if (!controller.signal.aborted) setImageError(true);
       });
     return () => controller.abort();
-  }, [deckId, item.id]);
+  }, [deckId, item.id, item.status]);
 
   async function copyLink() {
     try {
@@ -40,11 +43,13 @@ function DiagramCard({ deckId, item }: { deckId: string; item: DeckDiagram }) {
   }
 
   const status = {
-    queued: "Waiting for the image reader",
-    processing: "Reading diagram",
+    queued: "Waiting for description",
+    processing: "Generating description",
     awaiting_description: "Saving descriptions",
     ready: "Ready",
     failed: "Could not read this diagram",
+    review: "Waiting for crop review",
+    excluded: "Not selected",
   }[item.status];
   return (
     <article className="deck-card">
@@ -58,6 +63,18 @@ function DiagramCard({ deckId, item }: { deckId: string; item: DeckDiagram }) {
         Diagram {item.position} · {status}
       </p>
       {item.error && <p className="deck-error">{item.error}</p>}
+      {(item.short_alt || item.summary) && (
+        <div className="deck-description">
+          <h4>Alt text</h4>
+          <p>{item.short_alt || "No alt text yet."}</p>
+          <h4>Description</h4>
+          <ReactMarkdown components={{
+            h1: ({ children }) => <h5>{children}</h5>,
+            h2: ({ children }) => <h5>{children}</h5>,
+            h3: ({ children }) => <h5>{children}</h5>,
+          }}>{item.summary || "No description yet."}</ReactMarkdown>
+        </div>
+      )}
       {item.public_path && (
         <div className="deck-actions">
           <Link to={item.public_path} target="_blank" rel="noopener noreferrer">
@@ -102,25 +119,11 @@ export default function SlideDeckResultsPage() {
         if (controller.signal.aborted) return;
         setDeck(result);
         setError("");
-        // The legacy editor owns autoDescribe. Run that same function here so published
-        // pages are complete without requiring the uploader to open every editor first.
-        const pending = result.items.filter(
-          (item) => item.status === "awaiting_description" && item.graph,
-        );
-        for (const item of pending) {
-          if (controller.signal.aborted) return;
-          await apiFetch(`/decks/${deckId}/diagrams/${item.id}/finalize`, {
-            method: "POST",
-            signal: controller.signal,
-            json: describeDeckDiagram(item.graph!, item.title),
-          });
-        }
         if (
-          pending.length ||
           result.job_status === "queued" ||
           result.job_status === "running"
         ) {
-          timer = setTimeout(poll, pending.length ? 200 : 2000);
+          timer = setTimeout(poll, 2000);
         }
       } catch (cause) {
         if (!controller.signal.aborted)
@@ -169,9 +172,10 @@ export default function SlideDeckResultsPage() {
   const failed =
     deck?.error ||
     deck?.pages.some((page) => page.status === "failed") ||
-    deck?.items.some((item) => item.status === "failed");
+    deck?.items.some((item) => item.status === "failed" || item.status === "awaiting_description");
   const detected =
     deck?.pages.filter((page) => page.status === "done").length ?? 0;
+  const reviewing = deck?.phase === "detect";
 
   return (
     <div className="deck-page">
@@ -192,26 +196,23 @@ export default function SlideDeckResultsPage() {
       {deck && (
         <>
           <p role="status">
-            {detected} of {deck.page_count} slides scanned. {ready} of{" "}
-            {deck.items.length} diagram links ready.
+            {detected} of {deck.page_count} slides scanned. {reviewing
+              ? `${deck.items.length} diagram candidates found.`
+              : `${ready} of ${deck.items.filter(item => item.status !== "excluded").length} diagram links ready.`}
             {active
               ? " Processing continues in the background."
-              : deck.items.some(
-                    (item) => item.status === "awaiting_description",
-                  )
-                ? " Saving descriptions…"
-                : failed
+              : failed
                   ? " Processing finished with some errors."
-                  : " Processing finished."}
+                  : reviewing ? " Ready to review crops." : " Processing finished."}
           </p>
           <p>
             AI crops and descriptions can contain errors. Review each diagram
             before sharing.
           </p>
           <div className="deck-actions">
-            <button className="btn" onClick={copyAll} disabled={!ready}>
+            {!reviewing && <button className="btn" onClick={copyAll} disabled={!ready}>
               Copy all ready links
-            </button>
+            </button>}
             {failed && !active && (
               <button
                 className="btn btn--outline"
@@ -224,7 +225,8 @@ export default function SlideDeckResultsPage() {
           </div>
           <p role="status">{message}</p>
           {deck.error && <p className="deck-error">{deck.error}</p>}
-          {deck.pages.map((page, index) => (
+          {reviewing && !active && !failed && <DeckCropReview key={`${deck.id}-${deck.revision}`} deck={deck} onSaved={() => setRefresh(value => value + 1)} />}
+          {(!reviewing || active || failed) && deck.pages.map((page, index) => (
             <section
               className="deck-slide"
               key={index}
@@ -237,12 +239,14 @@ export default function SlideDeckResultsPage() {
               {page.status === "failed" && (
                 <p className="deck-error">{page.error}</p>
               )}
-              {page.status === "done" && page.count === 0 && (
-                <p>No diagrams detected.</p>
+              {page.status === "done" && !deck.items.some(item =>
+                item.page_number === index + 1 && item.status !== "excluded"
+              ) && (
+                <p>{page.count === 0 ? "No diagrams detected." : "No diagrams selected."}</p>
               )}
               <div className="deck-grid">
                 {deck.items
-                  .filter((item) => item.page_number === index + 1)
+                  .filter((item) => !reviewing && item.status !== "excluded" && item.page_number === index + 1)
                   .map((item) => (
                     <DiagramCard key={item.id} deckId={deckId} item={item} />
                   ))}

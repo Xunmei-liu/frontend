@@ -8,6 +8,7 @@ import { apiFetch } from "../lib/api";
 import { guestFetch } from "../lib/guest";
 import EditorToolbar, { type EditorMode } from "../components/editor/EditorToolbar";
 import AccessibilityPanel from "../components/editor/AccessibilityPanel";
+import ImageDescriptionEditor from "../components/editor/ImageDescriptionEditor";
 import ImageTypeSelect from "../components/editor/ImageTypeSelect";
 import ShareToolbar from "../components/access-reps/ShareToolbar";
 import { jsonToMermaid } from "../services/utils";
@@ -60,7 +61,7 @@ const DiagramEditorPage = ({ guest = false }: EditorProps) => {
   const [showImage, setShowImage] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [_saveStatus, setSaveStatus] = useState("");
+  const [saveStatus, setSaveStatus] = useState("");
 
   const [title, setTitle] = useState("");
   const [diagramType, setDiagramType] = useState<DiagramType>(() => {
@@ -777,9 +778,11 @@ const DiagramEditorPage = ({ guest = false }: EditorProps) => {
             summary: summary ?? "",
             short_alt: shortAlt ?? "",
             title: title ?? "",
-            flowchart_type: diagramType,
-            image_data_url: imgContent ?? null,
-            image_mime: localStorage.getItem("latestDiagramImageMime") ?? null,
+            flowchart_type: flowchartData.description_mode === "asu" ? "unknown" : diagramType,
+            ...(flowchartData.description_mode === "asu" ? {} : {
+              image_data_url: imgContent ?? null,
+              image_mime: localStorage.getItem("latestDiagramImageMime") ?? null,
+            }),
           },
         });
       }
@@ -796,7 +799,7 @@ const DiagramEditorPage = ({ guest = false }: EditorProps) => {
       setIsDirty(false);
       setOriginalFlowchart(flowchartData);
 
-      setSaveStatus(`Saved ${id}`);
+      setSaveStatus("Saved.");
       didSave = true;
 
       logResearchEvent({
@@ -862,7 +865,21 @@ const DiagramEditorPage = ({ guest = false }: EditorProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoSavePending]);
 
-  const handleReUpload = () => navigate("/create");
+  const handleReUpload = () => navigate("/create/image");
+
+  if (flowchartData?.description_mode === "asu") {
+    return <ImageDescriptionEditor
+      key={activeFlowchartId}
+      title={title} shortAlt={shortAlt} summary={summary} image={imgContent}
+      saving={isLoading} dirty={isDirty} status={saveStatus}
+      sharing={sharing} imagePublic={imagePublic}
+      publicPath={isPublished && publicSlug ? `/p/${publicSlug}` : null}
+      onSharingSave={saveSharing} onSave={saveToDatabase}
+      onTitle={(value) => { setTitle(value); setIsDirty(true); }}
+      onAlt={(value) => { setShortAlt(value); setAltEdited(true); setIsDirty(true); }}
+      onSummary={(value) => { setSummary(value); setDescEdited(true); setIsDirty(true); }}
+    />;
+  }
 
   return (
     <div className="diagram-page">

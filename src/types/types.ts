@@ -21,6 +21,7 @@ export type EdgeData = {
 };
 
 export type FlowchartData = {
+  description_mode?: "asu";
   nodes: NodeData[];
   edges: EdgeData[];
 };

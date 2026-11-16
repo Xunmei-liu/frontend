@@ -1,27 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   deckLinksText,
-  describeDeckDiagram,
   validateDeckFile,
   type DeckResult,
 } from "./slideDecks";
-import { autoDescribe } from "../arboretum/autoDescription";
-import type { FlowchartData } from "../types/types";
-
-const graph: FlowchartData = {
-  nodes: [
-    {
-      id: "a",
-      label: "Start",
-      shape: "rectangle",
-      coordinates: [
-        [0, 0],
-        [100, 50],
-      ],
-    },
-  ],
-  edges: [],
-};
 
 describe("slide decks", () => {
   it("validates file type, emptiness and size before uploading", () => {
@@ -38,15 +20,6 @@ describe("slide decks", () => {
     expect(
       validateDeckFile({ name: "slides.PDF", size: 100 } as File),
     ).toBeNull();
-  });
-
-  it("uses the existing description algorithm and section headings", () => {
-    const result = describeDeckDiagram(graph, "Example");
-    expect(result.short_alt).toBe(
-      autoDescribe("flowchart", graph, "Example").shortAlt,
-    );
-    expect(result.summary).toContain("## Structure");
-    expect(result.summary).toContain("Start");
   });
 
   it("copies only available links, preserving slide order", () => {

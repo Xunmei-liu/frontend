@@ -20,6 +20,7 @@ import PublicRepoPage from "../pages/PublicRepoPage";
 import Dashboard from "../pages/Dashboard";
 import AccountPage from "../pages/AccountPage";
 import CreatePage from "../pages/CreatePage";
+import CreateChoicePage from "../pages/CreateChoicePage";
 import SlideDeckUploadPage from "../pages/SlideDeckUploadPage";
 import SlideDeckResultsPage from "../pages/SlideDeckResultsPage";
 import DiagramEditorPage from "../pages/DiagramEditorPage";
@@ -91,10 +92,14 @@ export default function AppRoutes() {
           </RequireAuth>
         }
       />
-      <Route path="/upload" element={<Navigate to="/create" replace />} />
-      <Route path="/create/markdown" element={<Navigate to="/create" replace />} />
+      <Route path="/upload" element={<Navigate to="/create/image" replace />} />
+      <Route path="/create/markdown" element={<Navigate to="/create/image" replace />} />
       <Route
         path="/create"
+        element={<RequireAuth><CreateChoicePage /></RequireAuth>}
+      />
+      <Route
+        path="/create/image"
         element={
           <RequireAuth>
             <CreatePage />

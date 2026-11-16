@@ -1,0 +1,31 @@
+.crop-review-controls { border: 0; padding: 0; min-width: 0; }
+.crop-review select, .crop-review input { font: inherit; }
+.crop-review select { margin-left: 8px; padding: 8px; }
+.crop-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.crop-slide-navigation { display: flex; flex-wrap: wrap; gap: 10px; margin-left: auto; }
+.crop-canvas { position: relative; margin-top: 24px; touch-action: none; user-select: none; background: white; }
+.crop-canvas > img { display: block; width: 100%; height: auto; }
+.crop-canvas--drawing { cursor: crosshair; }
+.crop-canvas--drawing .crop-box { pointer-events: none; }
+.crop-box { position: absolute; border: 2px solid #184f48; box-sizing: border-box; }
+.crop-box--excluded { border-style: dashed; border-color: #555; }
+.crop-box--active { border: 3px solid #184f48; z-index: 2; }
+.crop-box-move { position: absolute; inset: 0; width: 100%; height: 100%; background: transparent; border: 0; padding: 0; cursor: move; color: #fff; text-align: left; }
+.crop-box-move span { position: absolute; top: 0; left: 0; background: #184f48; padding: 2px 6px; font-weight: bold; font-size: 0.85rem; }
+.crop-box--excluded .crop-box-move span { background: #555; }
+.crop-handle { position: absolute; width: 18px; height: 18px; padding: 0; border: 2px solid #184f48; background: white; border-radius: 2px; transform: translate(-50%, -50%); }
+.crop-handle--nw { top: 0; left: 0; cursor: nwse-resize; }
+.crop-handle--n { top: 0; left: 50%; cursor: ns-resize; }
+.crop-handle--ne { top: 0; left: 100%; cursor: nesw-resize; }
+.crop-handle--e { top: 50%; left: 100%; cursor: ew-resize; }
+.crop-handle--se { top: 100%; left: 100%; cursor: nwse-resize; }
+.crop-handle--s { top: 100%; left: 50%; cursor: ns-resize; }
+.crop-handle--sw { top: 100%; left: 0; cursor: nesw-resize; }
+.crop-handle--w { top: 50%; left: 0; cursor: ew-resize; }
+.crop-fields { margin-top: 24px; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.crop-fields fieldset { border: 1px solid #b5c9c5; border-radius: 8px; padding: 16px; min-width: 0; }
+.crop-fields .crop-fields--active { border: 2px solid #184f48; }
+.crop-fields legend { font-weight: bold; }
+.crop-fields label { display: block; margin-bottom: 8px; }
+.crop-fields input:not([type="checkbox"]) { display: block; width: 100%; box-sizing: border-box; padding: 6px; }
+.crop-selection-note { font-size: 0.9rem; }

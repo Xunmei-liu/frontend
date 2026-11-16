@@ -42,9 +42,9 @@ beforeEach(() => {
 
 function renderCreate() {
   return render(
-    <MemoryRouter initialEntries={["/create"]}>
+    <MemoryRouter initialEntries={["/create/image"]}>
       <Routes>
-        <Route path="/create" element={<CreatePage />} />
+        <Route path="/create/image" element={<CreatePage />} />
         <Route path="/charts" element={<ChartsProbe />} />
       </Routes>
     </MemoryRouter>

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-//import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { apiFetch } from "../lib/api";
 import FlowchartCard, { type FlowchartRow } from "../components/dashboard/FlowchartCard";
 import DashboardToolbar from "../components/dashboard/DashboardToolbar";
@@ -212,10 +212,29 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
+      <section className="dashboard-welcome" aria-labelledby="welcome-title">
+        <h1 id="welcome-title">Welcome to STEM-Accessibility</h1>
+        <p>
+          Turn STEM diagrams into alt text and descriptions to help make your
+          teaching materials more accessible.
+        </p>
+        <ul>
+          <li><strong>Upload</strong> an image or a slide deck exported as a PDF.</li>
+          <li><strong>Review and edit</strong> the AI-generated alt text and descriptions.</li>
+          <li><strong>Share</strong> a link to each diagram’s description with your students.</li>
+        </ul>
+        <p className="dashboard-welcome-note">
+          AI can make mistakes. Check each description against the original diagram before sharing.
+        </p>
+        <div className="dashboard-welcome-actions">
+          <Link className="btn" to="/create">Get started</Link>
+          <Link to="/about">About this project</Link>
+        </div>
+      </section>
       <div className="dashboard-top">
         <div className="dashboard-header">
           <div className="dashboard-heading">
-            <h1 className="dashboard-title">My STEM images</h1>
+            <h2 className="dashboard-title">My STEM images</h2>
 
             <div
               className={`dashboard-status ${statusKind === "error" ? "dashboard-status--error" : ""}`}

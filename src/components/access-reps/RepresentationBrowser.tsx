@@ -4,11 +4,9 @@ import { isDataStructure, normalizeDiagramType } from "../../arboretum/diagramTy
 import { viewsForType } from "../../arboretum/views";
 import type { ViewId } from "../../arboretum/views";
 import AccessibleTable from "./AccessibleTable";
-import NavigableList from "./NavigableList";
 import AccessibleMarkdown from "./AccessibleMarkdown";
-import Tactile from "./TactileRenderer";
 import AltTextView from "./AltTextView";
-import { TypedNavigable, TypedTable, TypedTactile, canRenderBrailleLabels } from "./typed/TypedViews";
+import { TypedTable, canRenderBrailleLabels } from "./typed/TypedViews";
 
 type Props = {
   data: FlowchartData;
@@ -42,7 +40,10 @@ const RepresentationBrowser: React.FC<Props> = ({
     () => isDataStructure(type) && canRenderBrailleLabels(type, data),
     [type, data]
   );
-  const views = useMemo(() => viewsForType(type, braille), [type, braille]);
+  const views = useMemo(() => viewsForType(type, braille).filter(
+    (option) => option.value !== "navigable" && option.value !== "tactile" &&
+      (option.value !== "table" || (data.description_mode !== "asu" && data.nodes.length > 0))
+  ), [type, braille, data]);
 
   const [picked, setPicked] = useState<ViewId | null>(null);
   const requested = (picked ?? initialView) as ViewId | null;
@@ -78,7 +79,7 @@ const RepresentationBrowser: React.FC<Props> = ({
             content={summary}
             imageDataUrl={imageDataUrl}
             imageAlt={shortAlt ?? ""}
-            flowchartData={data}
+            flowchartData={data.description_mode === "asu" ? null : data}
           />
         )}
         {view === "alt" && <AltTextView shortAlt={shortAlt} title={title} editPath={editPath} />}
@@ -88,14 +89,6 @@ const RepresentationBrowser: React.FC<Props> = ({
           ) : (
             <AccessibleTable json={data} />
           ))}
-        {view === "navigable" &&
-          (isDataStructure(type) ? (
-            <TypedNavigable type={type} data={data} title={title} />
-          ) : (
-            <NavigableList jsonData={data} />
-          ))}
-        {view === "tactile" &&
-          (braille ? <TypedTactile type={type} data={data} title={title} /> : <Tactile json={data} />)}
       </div>
     </div>
   );

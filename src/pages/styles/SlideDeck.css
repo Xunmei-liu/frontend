@@ -78,3 +78,14 @@
   outline: 3px solid #257a6e;
   outline-offset: 4px;
 }
+.deck-description {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem;
+  background: #f1f6f5;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}
+
+.deck-description h4 { margin: 0.5rem 0; }
+.deck-description h5 { font-size: 1rem; }

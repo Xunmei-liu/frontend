@@ -42,6 +42,7 @@ const AccessibleMarkdown: React.FC<Props> = ({
             alt={imageAlt || 'STEM image'}
             style={{
               width: '400px',
+              maxWidth: '100%',
               height: 'auto',
               border: '1px solid black',
               borderRadius: 8,

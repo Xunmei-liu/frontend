@@ -24,6 +24,8 @@ import { extractionPolicy, type ExtractionOptions } from "../components/charts/c
 import "./styles/CreatePage.css";
 
 type JobResult = {
+  short_alt?: string;
+  summary?: string;
   mermaid_json?: FlowchartData;
   mermaid_code?: string;
   image_data_url?: string;
@@ -208,11 +210,13 @@ export default function CreatePage() {
         method: "POST",
         json: {
           json_data: result.mermaid_json,
+          short_alt: result.short_alt,
+          summary: result.summary,
           ...(imageDataUrl
             ? { image_data_url: imageDataUrl, image_mime: result.image_mime || file.type || "image/png" }
             : {}),
           title: name.trim(),
-          flowchart_type: type,
+          flowchart_type: result.mermaid_json.description_mode === "asu" ? "unknown" : type,
           sharing,
           image_public: keepImage && imagePublic,
         },
@@ -273,11 +277,9 @@ export default function CreatePage() {
   return (
     <div className="create-page">
       <div className="create-shell">
+        <Link to="/create">Back</Link>
         <h1 className="create-title">Create a STEM image</h1>
-        <p>
-          <Link to="/decks/new">Upload a slide deck (PDF)</Link> to extract multiple
-          diagrams at once.
-        </p>
+        <p>Upload a diagram to generate alt text and a description, then review and edit before sharing.</p>
         <p className="create-subtitle">
           {isChart
             ? "Name it, then explore data from a CSV file or a chart picture as a table, a navigable outline, and sound."
@@ -585,11 +587,9 @@ export default function CreatePage() {
               )}
 
               <p className="create-hint" id={`${id}-dataflow`}>
-                <strong>Where your image goes.</strong> To turn it into a diagram we send it to Google
-                Cloud Vision, to read the text, and to an AI model (Google&rsquo;s Gemini, through
-                OpenRouter), to work out the arrows. Those services may log or keep it, so it may not
-                be private. Do not upload an image with personal or confidential information. To avoid
-                this, write the diagram as text with the Markdown editor.
+                <strong>Where your image goes.</strong> We send it to Google&rsquo;s Gemini API to
+                generate alt text, a description, and a transcription using ASU&rsquo;s accessibility
+                prompt. Do not upload personal or confidential information. Review the result before sharing.
               </p>
 
               <div className="create-actions">

@@ -54,8 +54,8 @@ export default function SlideDeckUploadPage() {
       <Link to="/create">Back</Link>
       <h1>Upload a slide deck</h1>
       <p>
-        Upload a PDF export. We find complete diagrams and create a description
-        page and link for each one.
+        Upload a PDF export. Review and adjust the detected diagrams, then
+        generate descriptions and shareable links for the ones you choose.
       </p>
       <form className="deck-panel" onSubmit={upload} aria-busy={busy}>
         <label htmlFor={inputId}>PDF slide deck</label>
@@ -75,8 +75,8 @@ export default function SlideDeckUploadPage() {
           first.
         </p>
         <p className="deck-note">
-          Demo: slides are sent to Gemini, and cropped diagrams use the existing
-          OCR/AI reader.
+            Slides and extracted images are sent to Gemini to generate alt text
+            and descriptions.
         </p>
         <button className="btn" type="submit" disabled={busy}>
           {busy ? "Uploading…" : "Extract diagrams"}

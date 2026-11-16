@@ -100,18 +100,11 @@ describe("slide deck screens", () => {
     expect(uploadMock.mock.calls[0][1].get("file")).toBeInstanceOf(File);
   });
 
-  it("finalizes descriptions once and exposes links only after saving", async () => {
-    let saved = false;
-    fetchMock.mockImplementation(async (path, options) => {
+  it("shows saved descriptions beside the image without browser finalization", async () => {
+    fetchMock.mockImplementation(async (path) => {
       if (path.endsWith("/image"))
         return { image_data_url: "data:image/png;base64,eA==" };
-      if (path.endsWith("/finalize")) {
-        saved = true;
-        expect(options?.json?.summary).toContain("## Structure");
-        return { ok: true };
-      }
-      return saved
-        ? {
+      return {
             ...result,
             items: [
               {
@@ -119,10 +112,11 @@ describe("slide deck screens", () => {
                 status: "ready",
                 graph: null,
                 public_path: "/p/abc",
+                short_alt: "Antibodies bind antigens.",
+                summary: "Antibodies bind antigens on the plate.\n\n## Transcribed text\n\nAntibodies",
               },
             ],
-          }
-        : result;
+          };
     });
     renderPage("/decks/deck");
     const link = await screen.findByRole("link", {
@@ -132,7 +126,10 @@ describe("slide deck screens", () => {
     expect(screen.getByText("No diagrams detected.")).toBeTruthy();
     expect(
       fetchMock.mock.calls.filter(([path]) => path.endsWith("/finalize")),
-    ).toHaveLength(1);
+    ).toHaveLength(0);
+    expect(screen.getByText("Antibodies bind antigens.")).toBeTruthy();
+    expect(screen.getByText("Antibodies bind antigens on the plate.")).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Transcribed text" })).toBeTruthy();
   });
 
   it("shows network errors with a reload action instead of an endless spinner", async () => {
@@ -143,6 +140,16 @@ describe("slide deck screens", () => {
       expect.stringContaining("Server unavailable"),
     );
     expect(screen.getByRole("button", { name: "Reload results" })).toBeTruthy();
+  });
+
+  it("shows a manual crop even when detection found nothing on that slide", async () => {
+    fetchMock.mockImplementation(async path => path.endsWith("/image")
+      ? { image_data_url: "data:image/png;base64,eA==" }
+      : { ...result, page_count: 1, pages: [{ status: "done", count: 0 }],
+          items: [{ ...result.items[0], kind: "manual", status: "ready", public_path: "/p/manual" }] });
+    renderPage("/decks/deck");
+    await screen.findByRole("link", { name: "Open description (new tab)" });
+    expect(screen.queryByText("No diagrams detected.")).toBeNull();
   });
 
   it("has labelled controls and no detectable accessibility violations on upload", async () => {
