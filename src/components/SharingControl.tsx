@@ -139,7 +139,7 @@ export default function SharingControl({
             {copyLabel}
           </button>
           <span id={`${id}-nolink`} className="sr-only">
-            Not available yet: this STEM image is private or not saved.
+            Not available yet: this complex image is private or not saved.
           </span>
         </div>
       )}

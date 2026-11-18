@@ -16,7 +16,7 @@ export default function TryPage() {
       <div className="try-page" style={{ maxWidth: 720, margin: "24px auto", padding: "0 16px" }}>
         <h1>You are signed in</h1>
         <p>
-          Try it is for people without an account. <Link to="/create">Create a STEM image</Link> from your
+          Try it is for people without an account. <Link to="/create">Create a complex image</Link> from your
           account instead, where you choose who can see it.
         </p>
       </div>
@@ -36,7 +36,7 @@ export default function TryPage() {
           borderRadius: 8,
         }}
       >
-        <strong>Try it, no account needed.</strong> Your STEM image is public and kept with this browser
+        <strong>Try it, no account needed.</strong> Your complex image is public and kept with this browser
         (a cookie holds a random token, nothing else), and you can make one. <Link to="/login">Create an account</Link> to keep it, make more, and choose
         who can see them. No AI is used here.
       </aside>

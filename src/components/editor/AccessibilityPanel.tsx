@@ -46,7 +46,7 @@ export default function AccessibilityPanel({
           ? "accessibility-summary-bar accessibility-summary-bar--open"
           : "accessibility-summary-bar"
       }
-      aria-label="STEM image accessibility"
+      aria-label="complex image accessibility"
     >
       <div className="accessibility-summary-bar__head">
         <h2 className="accessibility-summary-bar__title">

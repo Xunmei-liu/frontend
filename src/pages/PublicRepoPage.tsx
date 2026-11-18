@@ -69,16 +69,16 @@ export default function PublicRepoPage() {
   const loaded = statusKind === "idle";
   const hasFilters = query.trim() !== "" || typeFilter !== "all";
   const countText = loaded
-    ? `Showing ${filtered.length} of ${rows.length} STEM ${rows.length === 1 ? "image" : "images"}`
+    ? `Showing ${filtered.length} of ${rows.length} complex ${rows.length === 1 ? "image" : "images"}`
     : status;
 
   return (
     <main className="repo-page">
       <header className="repo-hero">
         <div className="repo-hero__inner">
-          <h1 className="repo-hero__title">Public STEM images</h1>
+          <h1 className="repo-hero__title">Public complex images</h1>
           <p className="repo-hero__subtitle">
-            Browse STEM images that their creators chose to share publicly.
+            Browse complex images that their creators chose to share publicly.
           </p>
 
           <div className="repo-controls" role="region" aria-label="Repository filters">
@@ -113,11 +113,11 @@ export default function PublicRepoPage() {
         </div>
       </header>
 
-      <section className="repo-grid" aria-label="Public STEM images">
+      <section className="repo-grid" aria-label="Public complex images">
         {filtered.length === 0 ? (
           loaded && rows.length === 0 ? (
             <div className="repo-empty">
-              <div className="repo-empty__title">Nobody has shared a STEM image yet</div>
+              <div className="repo-empty__title">Nobody has shared a complex image yet</div>
               <div className="repo-empty__body">
                 <Link to="/try">Try it</Link> or <Link to="/create">create one</Link>, or <Link to="/about">learn how it works</Link>.
               </div>

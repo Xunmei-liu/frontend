@@ -1,4 +1,4 @@
-/** Who can see a STEM image. One setting; the backend keeps visibility and publication in sync. */
+/** Who can see a complex image. One setting; the backend keeps visibility and publication in sync. */
 export type Sharing = "public" | "link" | "private";
 
 export const SHARING_OPTIONS: { value: Sharing; label: string; help: string }[] = [

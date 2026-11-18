@@ -25,7 +25,7 @@ function toBoxes(data: FlowchartData): Box[] {
   return out;
 }
 
-/** A tiny decorative drawing of the graph, for cards whose STEM image has no uploaded picture. */
+/** A tiny decorative drawing of the graph, for cards whose complex image has no uploaded picture. */
 export default function GraphSketch({ data }: { data: FlowchartData }) {
   const { boxes, edges, view } = useMemo(() => {
     const boxes = toBoxes(data);

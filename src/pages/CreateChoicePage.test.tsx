@@ -20,7 +20,7 @@ function renderChoices() {
 
 it("offers two clearly labelled destinations without showing the image form", async () => {
   const { container } = renderChoices();
-  expect(screen.getByRole("link", { name: "Create a STEM image" }).getAttribute("href")).toBe("/create/image");
+  expect(screen.getByRole("link", { name: "Create a complex image" }).getAttribute("href")).toBe("/create/image");
   expect(screen.getByRole("link", { name: "Upload a slide deck" }).getAttribute("href")).toBe("/decks/new");
   expect(screen.queryByRole("textbox")).toBeNull();
   const report = await axe.run(container, { rules: { "color-contrast": { enabled: false } } });
@@ -31,7 +31,7 @@ it("opens the single image flow with the keyboard", async () => {
   const user = userEvent.setup();
   renderChoices();
   await user.tab();
-  expect(document.activeElement).toBe(screen.getByRole("link", { name: "Create a STEM image" }));
+  expect(document.activeElement).toBe(screen.getByRole("link", { name: "Create a complex image" }));
   await user.keyboard("{Enter}");
   expect(screen.getByRole("heading", { name: "Single image form" })).toBeTruthy();
 });

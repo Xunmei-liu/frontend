@@ -46,9 +46,9 @@ export default function Header() {
           <Link
             to={user ? "/dashboard" : "/"}
             className="brand"
-            aria-label={user ? "STEM-Accessibility, go to your dashboard" : "STEM-Accessibility home"}
+            aria-label={user ? "Complex-Image-Accessibility, go to your dashboard" : "Complex-Image-Accessibility home"}
           >
-            STEM-Accessibility
+            Complex-Image-Accessibility
           </Link>
 
           <nav className="app-nav" aria-label="Primary navigation">

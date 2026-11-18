@@ -24,7 +24,7 @@ console.log(jobId)
 
       <div className="upload-job-status__content">
         <div className="upload-job-status__title">
-          {error ? "Something went wrong" : "Working on your STEM image"}
+          {error ? "Something went wrong" : "Working on your complex image"}
         </div>
 
         <div className="upload-job-status__message">

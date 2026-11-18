@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
         </div>
 
         <p className="site-footer__credit">
-          Tree, list, and array STEM images use code and designs from{" "}
+          Tree, list, and array views use code and designs from{" "}
           <a
             href={ARBORETUM_URL}
             className="site-footer__link"
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
         </p>
 
         <div className="site-footer__sub">
-          © {year} STEM-Accessibility
+          © {year} Complex-Image-Accessibility
         </div>
       </div>
     </footer>

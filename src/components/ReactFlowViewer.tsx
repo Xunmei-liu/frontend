@@ -62,7 +62,7 @@ export function FlowchartViewer({
         borderRadius: 8,
         overflow: 'hidden',
       }}
-      aria-label="Digital STEM image viewer"
+      aria-label="Digital complex image viewer"
     >
       <ReactFlow
         nodes={nodes}

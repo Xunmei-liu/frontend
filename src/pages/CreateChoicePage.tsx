@@ -7,7 +7,7 @@ export default function CreateChoicePage() {
       <h1>What would you like to create?</h1>
       <div className="create-choice-grid">
         <Link className="create-choice-card" to="/create/image" aria-labelledby="create-image-title" aria-describedby="create-image-description">
-          <h2 id="create-image-title">Create a STEM image</h2>
+          <h2 id="create-image-title">Create a complex image</h2>
           <p id="create-image-description">Upload a single diagram to generate alt text and a description, then review and edit before sharing.</p>
           <span className="create-choice-arrow" aria-hidden="true">→</span>
         </Link>

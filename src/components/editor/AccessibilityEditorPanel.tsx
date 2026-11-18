@@ -118,7 +118,7 @@ export default function AccessibilityEditorModal({
                       },
                     });
                   }}
-                  placeholder="Give this STEM image a short, meaningful title"
+                  placeholder="Give this complex image a short, meaningful title"
                 />
 
                 <p className="accessibility-modal-help">
@@ -232,7 +232,7 @@ export default function AccessibilityEditorModal({
                 {imageDataUrl ? (
                   <img
                     src={imageDataUrl}
-                    alt="STEM image reference"
+                    alt="complex image reference"
                     className="accessibility-modal-visual__image"
                   />
                 ) : (

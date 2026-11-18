@@ -66,7 +66,7 @@ export default function ImageDescriptionEditor(props: Props) {
 
   return (
     <main className="image-description-editor">
-      <h1>STEM image editor</h1>
+      <h1>Complex image editor</h1>
       <SharingControl
         sharing={props.sharing} imagePublic={props.imagePublic}
         hasImage={!!props.image} publicPath={props.publicPath}

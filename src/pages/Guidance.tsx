@@ -16,7 +16,7 @@ const AltTextGuidancePage: React.FC = () => {
     <main className="guidance-page">
       <GuidanceHero
         title="Alt Text for Complex Images: When It’s Enough—and When It Isn’t"
-        subtitle="How to apply W3C guidance for images, and how STEM-Accessibility supports long descriptions for complex graphics."
+        subtitle="How to apply W3C guidance for images, and how Complex-Image-Accessibility supports long descriptions for complex graphics."
       />
 
       <GuidanceSection id="purpose" title="Purpose & Audience">
@@ -78,9 +78,9 @@ const AltTextGuidancePage: React.FC = () => {
         </ul>
       </GuidanceSection>
 
-      <GuidanceSection id="accessflow" title="How STEM-Accessibility Supports Long Descriptions for Complex Images">
+      <GuidanceSection id="accessflow" title="How Complex-Image-Accessibility Supports Long Descriptions for Complex Images">
         <p>
-          STEM-Accessibility operationalizes this guidance by separating the accessible representation from the original visual
+          Complex-Image-Accessibility operationalizes this guidance by separating the accessible representation from the original visual
           asset—while keeping them permanently linked.
         </p>
         <ul>
@@ -98,15 +98,15 @@ const AltTextGuidancePage: React.FC = () => {
       
       <GuidanceSection id="how-to-use" title="How to Use This Guidance">
         <p>
-          Use this page to understand how to choose appropriate text alternatives. Use STEM-Accessibility when you need to apply
+          Use this page to understand how to choose appropriate text alternatives. Use Complex-Image-Accessibility when you need to apply
           these practices consistently across many complex graphics and maintain permanent links over time.
         </p>
       </GuidanceSection>
 
       <SoftCTA
         title="Need a scalable way to publish long descriptions for complex graphics?"
-        body="STEM-Accessibility provides a centralized system to generate and maintain accessible representations using permanent links."
-        primaryText="See how STEM-Accessibility works"
+        body="Complex-Image-Accessibility provides a centralized system to generate and maintain accessible representations using permanent links."
+        primaryText="See how Complex-Image-Accessibility works"
         primaryHref="/#how-it-works"
       />
     </main>

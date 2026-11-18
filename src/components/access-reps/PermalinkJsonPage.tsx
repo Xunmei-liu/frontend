@@ -33,7 +33,7 @@ const PermalinkJsonPage: React.FC = () => {
         setData(payload);
       } catch (e: any) {
         console.error(e);
-        setError(e?.message || "Failed to load STEM image JSON");
+        setError(e?.message || "Failed to load complex image JSON");
       }
     })();
   }, [id]);
@@ -49,10 +49,10 @@ const PermalinkJsonPage: React.FC = () => {
 
   return (
     <FlowchartJsonViewer
-      title="STEM image JSON"
-      primaryIdLabel="STEM image ID"
+      title="complex image JSON"
+      primaryIdLabel="complex image ID"
       primaryIdValue={id}
-      backLabel="Back to STEM image"
+      backLabel="Back to complex image"
       backTo={`/flowchart/${id}`}
       jsonValue={jsonValue}
       defaultFileBase={`flowchart-${id}`}

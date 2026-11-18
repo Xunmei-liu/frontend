@@ -87,7 +87,7 @@ export default function CreatePage() {
   const [showUpload, setShowUpload] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [imagePublic, setImagePublic] = useState(false);
-  // Keep the original next to the STEM image so it can be compared while editing. On by default
+  // Keep the original next to the complex image so it can be compared while editing. On by default
   // for the person's own work; unchecking it means the image is not stored at all.
   const [keepImage, setKeepImage] = useState(true);
 
@@ -198,10 +198,10 @@ export default function CreatePage() {
           upload_job_id: job.job_id,
         },
       });
-      setStatus("Processing STEM image…");
+      setStatus("Processing complex image…");
 
       const result = await pollJobUntilComplete(job.job_id);
-      if (!result?.mermaid_json) throw new Error("Failed to process STEM image.");
+      if (!result?.mermaid_json) throw new Error("Failed to process complex image.");
 
       setStatus("Saving…");
       // When the person chose not to keep the original, it is not sent to be saved at all.
@@ -251,7 +251,7 @@ export default function CreatePage() {
           error_message: e instanceof Error ? e.message : String(e),
         },
       });
-      setStatus("We couldn’t process that STEM image. Please try again.");
+      setStatus("We couldn’t process that complex image. Please try again.");
       setStatusIsError(true);
     } finally {
       setBusy(false);
@@ -278,7 +278,7 @@ export default function CreatePage() {
     <div className="create-page">
       <div className="create-shell">
         <Link to="/create">Back</Link>
-        <h1 className="create-title">Create a STEM image</h1>
+        <h1 className="create-title">Create a complex image</h1>
         <p>Upload a diagram to generate alt text and a description, then review and edit before sharing.</p>
         <p className="create-subtitle">
           {isChart
@@ -561,11 +561,11 @@ export default function CreatePage() {
                   aria-describedby={`${id}-keep-help`}
                 />
                 <span>
-                  <strong>Keep the original image with this STEM image.</strong>
+                  <strong>Keep the original image with this complex image.</strong>
                   <span id={`${id}-keep-help`} className="create-hint">
                     {" "}
                     So you can compare it while editing. Only you can see it unless you choose to show it
-                    on the shared page, and it is deleted when you delete the STEM image. If you leave
+                    on the shared page, and it is deleted when you delete the complex image. If you leave
                     this unchecked the image is not saved after it has been read.
                   </span>
                 </span>

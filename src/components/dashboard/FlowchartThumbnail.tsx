@@ -32,7 +32,7 @@ export default function FlowchartThumbnail({
 
   const [loading, setLoading] = useState(false);
 
-  // No uploaded image (for example text-authored STEM images): sketch the graph instead.
+  // No uploaded image (for example text-authored complex images): sketch the graph instead.
   const [graph, setGraph] = useState<FlowchartData | null>(() =>
     graphCache.has(flowchartId) ? (graphCache.get(flowchartId) ?? null) : null
   );

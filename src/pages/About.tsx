@@ -14,10 +14,10 @@ const About: React.FC = () => {
       <header className="about__hero">
         <div className="about__heroInner">
           <h1 id="about-title" className="about__title">
-            About STEM-Accessibility
+            About Complex-Image-Accessibility
           </h1>
           <p className="about__lede">
-            STEM-Accessibility is a research-driven platform for making STEM images meaningfully accessible.
+            Complex-Image-Accessibility is a research-driven platform for making complex images meaningfully accessible.
           </p>
         </div>
       </header>
@@ -26,15 +26,15 @@ const About: React.FC = () => {
         {/* Overview */}
         <section className="about__section" aria-labelledby="overview-title">
           <h2 id="overview-title" className="about__h2">
-            What STEM-Accessibility is
+            What Complex-Image-Accessibility is
           </h2>
           <p className="about__p">
-            STEM images—such as flowcharts, decision trees, process maps, and organizational charts—play a central role in how people learn, reason, and communicate. Yet they are still largely treated as static images, leaving many
+            Complex images—such as flowcharts, decision trees, process maps, and organizational charts—play a central role in how people learn, reason, and communicate. Yet they are still largely treated as static images, leaving many
             people without access to the information they convey.
           </p>
           <p className="about__p">
-            STEM-Accessibility is built on the idea that accessibility improves when STEM image structure is made explicit. Instead of asking people to describe images after the fact, we treat STEM images as structured systems made up of
-            nodes, relationships, and meaning. This allows a single STEM image to be expressed in multiple accessible
+            Complex-Image-Accessibility is built on the idea that accessibility improves when complex image structure is made explicit. Instead of asking people to describe images after the fact, we treat complex images as structured systems made up of
+            nodes, relationships, and meaning. This allows a single complex image to be expressed in multiple accessible
             forms, including long descriptions, keyboard-navigable views, and tactile or auditory outputs—without losing
             the underlying logic.
           </p>
@@ -46,20 +46,20 @@ const About: React.FC = () => {
             The problem
           </h2>
           <p className="about__p">
-            For many blind and disabled learners, STEM images remain one of the most persistent barriers to understanding
-            course material, documentation, and decision-making tools. When STEM images are inaccessible, access is
+            For many blind and disabled learners, complex images remain one of the most persistent barriers to understanding
+            course material, documentation, and decision-making tools. When complex images are inaccessible, access is
             delayed, partial, or missing entirely.
           </p>
           <p className="about__p">
             Today, accessibility often relies on manual, one-off fixes: writing ad-hoc descriptions, retrofitting images,
             or relying on individual expertise without shared tools or structure. This approach doesn’t scale, and it
-            rarely supports deeper understanding of how a STEM image actually works.
+            rarely supports deeper understanding of how a complex image actually works.
           </p>
           <p className="about__p">
-            At the same time, the responsibility for providing accessible STEM images often falls on people who are not
-            accessibility experts—or who did not originally design the STEM image and may lack deep domain knowledge of its
-            content. Existing accessibility guidance for STEM images is often fragmented, underspecified, or focused on
-            minimum requirements rather than on what it actually means to understand a STEM image. As a result, STEM images
+            At the same time, the responsibility for providing accessible complex images often falls on people who are not
+            accessibility experts—or who did not originally design the complex image and may lack deep domain knowledge of its
+            content. Existing accessibility guidance for complex images is often fragmented, underspecified, or focused on
+            minimum requirements rather than on what it actually means to understand a complex image. As a result, complex images
             may technically meet guidelines while still failing to provide real access.
           </p>
         </section>
@@ -70,12 +70,12 @@ const About: React.FC = () => {
             Our approach
           </h2>
           <p className="about__p">
-            STEM-Accessibility extracts STEM image structure from images and enables STEM images to be explored, verified, and
+            Complex-Image-Accessibility extracts complex image structure from images and enables complex images to be explored, verified, and
             transformed across multiple modalities. This approach supports clearer descriptions, more reliable
-            navigation, and representations that align with how people reason about STEM images—not just how they look.
+            navigation, and representations that align with how people reason about complex images—not just how they look.
           </p>
           <p className="about__p">
-            The accessible representations produced by STEM-Accessibility are grounded in accessibility research. We are collecting solutions from multiple papers that address these issues.
+            The accessible representations produced by Complex-Image-Accessibility are grounded in accessibility research. We are collecting solutions from multiple papers that address these issues.
           </p>
          
         </section>
@@ -129,15 +129,15 @@ const About: React.FC = () => {
         {/* Who it's for */}
         <section className="about__section" aria-labelledby="for-title">
           <h2 id="for-title" className="about__h2">
-            Who STEM-Accessibility is for
+            Who Complex-Image-Accessibility is for
           </h2>
           <p className="about__p">
-            STEM-Accessibility is designed for educators, researchers, instructional designers, and organizations that rely on
-            STEM images to teach, explain, and communicate ideas—and who want those STEM images to be usable by everyone.
+            Complex-Image-Accessibility is designed for educators, researchers, instructional designers, and organizations that rely on
+            complex images to teach, explain, and communicate ideas—and who want those complex images to be usable by everyone.
           </p>
           <p className="about__p">
-            If you create, maintain, or are responsible for sharing STEM images—and need to provide accessible access to
-            them without being an accessibility specialist or a domain expert—STEM-Accessibility provides structured support to
+            If you create, maintain, or are responsible for sharing complex images—and need to provide accessible access to
+            them without being an accessibility specialist or a domain expert—Complex-Image-Accessibility provides structured support to
             make that possible.
           </p>
         </section>
@@ -148,7 +148,7 @@ const About: React.FC = () => {
             About the creator
           </h2>
           <p className="about__p">
-            STEM-Accessibility was created by{" "}
+            Complex-Image-Accessibility was created by{" "}
             <a className="about__link" href={BRIANNA_URL} target="_blank" rel="noopener noreferrer">
               Brianna Wimer
               <span className="sr-only"> (opens in a new tab)</span>

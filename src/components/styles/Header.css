@@ -29,6 +29,8 @@
 }
 
 .brand {
+  max-width: 100%;
+  overflow-wrap: anywhere;
   font-weight: 800;
   color: var(--black);
   text-decoration: none;

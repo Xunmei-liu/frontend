@@ -3,7 +3,7 @@ import type { FlowchartData } from "../types/types";
 /**
  * What counts as a change to the diagram's meaning: which nodes exist, their labels and shapes, and
  * which node points to which (with link labels). Visual styling such as line style is ignored, so
- * opening a saved STEM image is not reported as an edit just because the canvas normalizes it.
+ * opening a saved complex image is not reported as an edit just because the canvas normalizes it.
  */
 export function structuralSignature(fc: FlowchartData) {
   const nodes = (fc.nodes ?? [])

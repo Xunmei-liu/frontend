@@ -1,4 +1,4 @@
-/** Clear the editor's remembered "latest" STEM image so a new one starts clean. */
+/** Clear the editor's remembered "latest" complex image so a new one starts clean. */
 export function clearLatestDiagramCache() {
   for (const key of [
     "latestDiagramJSON",

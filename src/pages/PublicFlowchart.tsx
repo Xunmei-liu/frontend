@@ -53,7 +53,7 @@ const PublicFlowchart: React.FC = () => {
         // Fetch public flowchart
         const res = await fetch(`${API_URL}/p/${encodeURIComponent(public_slug)}`);
         if (!res.ok) {
-          throw new Error(`STEM image not found`);
+          throw new Error(`complex image not found`);
         }
 
         const fc: PublicFlowchartResponse = await res.json();
@@ -75,7 +75,7 @@ const PublicFlowchart: React.FC = () => {
         }
       } catch (err: any) {
         console.error("Public flowchart load error:", err);
-        setError(err.message || "Failed to load STEM image");
+        setError(err.message || "Failed to load complex image");
       }
     };
 
@@ -87,7 +87,7 @@ const PublicFlowchart: React.FC = () => {
   }
 
   if (!data) {
-    return <p>Loading STEM image…</p>;
+    return <p>Loading complex image…</p>;
   }
 const publishedLabel = formatDateTime(data.published_at);
 
@@ -104,7 +104,7 @@ const publishedLabel = formatDateTime(data.published_at);
       </div>
 
       <div style={{ fontSize: 13, opacity: 0.8, alignSelf: "flex-end" }}>
-        <a href="/" style={{ textDecoration: "none" }}>STEM-Accessibility</a>
+        <a href="/" style={{ textDecoration: "none" }}>Complex-Image-Accessibility</a>
       </div>
     </div>
 
@@ -132,7 +132,7 @@ const publishedLabel = formatDateTime(data.published_at);
         opacity: 0.75,
       }}
     >
-      Published via STEM-Accessibility. Review AI-generated descriptions for accuracy.
+      Published via Complex-Image-Accessibility. Review AI-generated descriptions for accuracy.
     </div>
     </div>
   );

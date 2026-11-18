@@ -13,8 +13,8 @@ afterEach(cleanup);
 it("introduces the workflow before the image library", async () => {
   render(<MemoryRouter><Dashboard /></MemoryRouter>);
   await screen.findByText("Loaded 0");
-  expect(screen.getByRole("heading", { level: 1 }).textContent).toBe("Welcome to STEM-Accessibility");
-  expect(screen.getByRole("heading", { name: "My STEM images", level: 2 })).toBeTruthy();
+  expect(screen.getByRole("heading", { level: 1 }).textContent).toBe("Welcome to Complex-Image-Accessibility");
+  expect(screen.getByRole("heading", { name: "My complex images", level: 2 })).toBeTruthy();
   expect(screen.getAllByRole("listitem")).toHaveLength(3);
   expect(screen.getByText(/AI can make mistakes/)).toBeTruthy();
   expect(screen.getByRole("link", { name: "Get started" }).getAttribute("href")).toBe("/create");

@@ -285,7 +285,7 @@ export default function AuthPage() {
           </form>
 
          <div className="auth-footnote">
-            STEM-Accessibility is a research project. Questions or feedback? Email{" "}
+            Complex-Image-Accessibility is a research project. Questions or feedback? Email{" "}
             <a href="mailto:stem-accessibility@uw.edu">stem-accessibility@uw.edu</a>, browse the{" "}
             <a href="https://github.com/stem-accessibility/frontend" target="_blank" rel="noopener noreferrer">source code</a>,
             or{" "}

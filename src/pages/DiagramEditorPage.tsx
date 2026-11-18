@@ -244,7 +244,7 @@ const DiagramEditorPage = ({ guest = false }: EditorProps) => {
         setIsDirty(false);
       } catch (e: any) {
         console.error(e);
-        setSaveStatus(e?.message || "Failed to load STEM image.");
+        setSaveStatus(e?.message || "Failed to load complex image.");
 
         const empty = createEmptyFlowchart();
         setFlowchartData(empty);
@@ -643,7 +643,7 @@ const DiagramEditorPage = ({ guest = false }: EditorProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flowchartData, diagramType, title, altEdited, descEdited]);
 
-  /** Change who can see this STEM image. Before the first save it is applied on creation. */
+  /** Change who can see this complex image. Before the first save it is applied on creation. */
   const saveSharing = async (next: { sharing: Sharing; imagePublic: boolean }) => {
     const id = activeFlowchartId || localStorage.getItem("activeFlowchartId");
     if (!id || id === "undefined") {
@@ -885,7 +885,7 @@ const DiagramEditorPage = ({ guest = false }: EditorProps) => {
     <div className="diagram-page">
       <div className="diagram-shell">
         <main className="diagram-main" aria-labelledby="diagram-editor-page-heading">
-          <h1 id="diagram-editor-page-heading">STEM image editor</h1>
+          <h1 id="diagram-editor-page-heading">Complex image editor</h1>
 
           
 
@@ -1074,7 +1074,7 @@ const DiagramEditorPage = ({ guest = false }: EditorProps) => {
         />
 
         <p id="markdown-help" className="markdown-split__help">
-          Write the STEM image as Mermaid text; the preview updates as you type.{" "}
+          Write the complex image as Mermaid text; the preview updates as you type.{" "}
           <a
             href="https://mermaid.js.org/syntax/flowchart.html"
             target="_blank"
@@ -1164,7 +1164,7 @@ const DiagramEditorPage = ({ guest = false }: EditorProps) => {
                 </button>
               </div>
               <div className="image-overlay__body">
-                <img src={imgContent} alt="Uploaded STEM image" />
+                <img src={imgContent} alt="Uploaded complex image" />
               </div>
             </div>
           </div>

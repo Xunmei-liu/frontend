@@ -42,7 +42,7 @@ const fileBase = (title: string) =>
   "stem-image";
 
 /**
- * Export: copy and download the accessible text of a STEM image in HTML, Markdown, or text, plus
+ * Export: copy and download the accessible text of a complex image in HTML, Markdown, or text, plus
  * embed code and a QR code for the shared page. Lives in the editor, under Accessibility.
  */
 export default function ShareToolbar({ title, shortAlt, summary, json, publicUrl }: Props) {
@@ -174,7 +174,7 @@ export default function ShareToolbar({ title, shortAlt, summary, json, publicUrl
             type="button"
             className="accessibility-summary-chip share-chip"
             disabled={!publicUrl}
-            title={publicUrl ? undefined : "Share this STEM image to get a QR code."}
+            title={publicUrl ? undefined : "Share this complex image to get a QR code."}
             onClick={copyQr}
           >
             Copy QR code

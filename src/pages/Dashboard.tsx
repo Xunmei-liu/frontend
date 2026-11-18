@@ -137,7 +137,7 @@ export default function Dashboard() {
   });
 
   const confirmed = window.confirm(
-    "Delete this STEM image? This cannot be undone."
+    "Delete this complex image? This cannot be undone."
   );
 
   if (!confirmed) {
@@ -213,9 +213,9 @@ export default function Dashboard() {
   return (
     <div className="dashboard-container">
       <section className="dashboard-welcome" aria-labelledby="welcome-title">
-        <h1 id="welcome-title">Welcome to STEM-Accessibility</h1>
+        <h1 id="welcome-title">Welcome to Complex-Image-Accessibility</h1>
         <p>
-          Turn STEM diagrams into alt text and descriptions to help make your
+          Turn complex diagrams into alt text and descriptions to help make your
           teaching materials more accessible.
         </p>
         <ul>
@@ -234,7 +234,7 @@ export default function Dashboard() {
       <div className="dashboard-top">
         <div className="dashboard-header">
           <div className="dashboard-heading">
-            <h2 className="dashboard-title">My STEM images</h2>
+            <h2 className="dashboard-title">My complex images</h2>
 
             <div
               className={`dashboard-status ${statusKind === "error" ? "dashboard-status--error" : ""}`}
@@ -246,7 +246,7 @@ export default function Dashboard() {
             </div>
       {claimedNotice && (
         <p className="dashboard-notice" role="status">
-          The STEM image you made while trying it is now in your account.
+          The complex image you made while trying it is now in your account.
         </p>
       )}
           </div>
@@ -296,7 +296,7 @@ export default function Dashboard() {
         />
       </div>
 
-      <div className="dashboard-grid" aria-label="STEM image list">
+      <div className="dashboard-grid" aria-label="complex image list">
         {pageRows.map((r) => (
           <FlowchartCard
             key={r.flowchart_id}

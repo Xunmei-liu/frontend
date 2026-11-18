@@ -20,7 +20,7 @@ const AccessibleMarkdown: React.FC<Props> = ({
 
   const figureDescription =
     imageAlt ||
-    'Digital STEM image preview. A detailed description follows below.';
+    'Digital complex image preview. A detailed description follows below.';
    return (
     <div>
       {flowchartData ? (
@@ -39,7 +39,7 @@ const AccessibleMarkdown: React.FC<Props> = ({
         <figure style={{ margin: '0 0 16px 0' }}>
           <img
             src={imageDataUrl}
-            alt={imageAlt || 'STEM image'}
+            alt={imageAlt || 'complex image'}
             style={{
               width: '400px',
               maxWidth: '100%',
